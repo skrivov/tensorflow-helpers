@@ -2,6 +2,13 @@ import tensorflow as tf
 import datetime
 
 
+# Create a function to implement a ModelCheckpoint callback with a specific filename
+def create_model_checkpoint(model_name, save_path="model_experiments"):
+    return tf.keras.callbacks.ModelCheckpoint(filepath=os.path.join(save_path, model_name), # create filepath to save model
+                                              verbose=0, # only output a limited amount of text
+                                              save_best_only=True) # save only the best model to file
+
+
 def learning_rate_schedule():
     return tf.keras.callbacks.LearningRateScheduler(lambda epoch: 1e-8 * 10**(epoch / 20))
 
